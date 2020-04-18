@@ -71,6 +71,9 @@ dicionario_braille_pt = {
 }
 
 passador = False
+data = b""  # Guarda os dados binários que vão ser escritos no ficheiro
+byte = 0    # Guarda o byte que vai ser adicionado a data
+count = 0   # Usado para determinar se estamos a escrever a parte mais ou menos significativa do byte
 
 for i in range(len(strings)):
     if passador == True:
@@ -78,12 +81,25 @@ for i in range(len(strings)):
         continue
     if (strings[i] in dicionario_braille_pt or strings[i] in dicionario_braille_numeros):
         if dicionario_braille_pt[strings[i]] == True and i < len(strings):
-            print(dicionario_braille_numeros[strings[i+1]], end="")
+            half_char = int(dicionario_braille_numeros[strings[i+1]], 16)
+            count += 1
             passador = True
         else:
-            print(dicionario_braille_pt[strings[i]], end="")
+            half_char = int(dicionario_braille_pt[strings[i]], 16)
+            count += 1
+
+        if count == 1:      # O half_char é a metade mais significativa
+            byte += half_char << 4
+        elif count == 2:    # O half_char é a metade menos significativa
+            byte += half_char
+            data += chr(byte).encode()  # Transformar em byte
+            count = 0
+            byte = 0
 
     elif strings[i] in dicionario_braille_pt and passador == True:
         passador = False
     else:
         print("\nNão está no dicionario. ", strings[i])
+
+with open("data", "wb") as file:
+    file.write(data)
