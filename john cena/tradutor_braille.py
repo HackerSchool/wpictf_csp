@@ -15,8 +15,7 @@ braille_lista = [[0,1,1,1,0,0], [1,0,0,0,0,0], [1,0,1,0,0,0], [1,1,0,0,0,0],
                 [1,0,0,1,1,0], [1,1,1,0,1,0], [1,1,1,1,1,0], [1,0,1,1,1,0],
                 [0,1,1,0,1,0], [0,1,1,1,1,0], [1,0,0,0,1,1], [1,0,1,0,1,1],
                 [0,1,1,1,0,1], [1,1,0,0,1,1], [1,1,0,1,1,1], [1,0,0,1,1,1],
-                [0,1,0,1,1,1], [0,1,0,1,0,1], [1,0,1,0,0,1], [0,1,0,1,1,0]]
-
+                [0,1,0,1,1,1]]
 
 braille_lista_txt = []
 
@@ -87,7 +86,6 @@ for i in range(len(strings)):
         else:
             half_char = int(dicionario_braille_pt[strings[i]], 16)
             count += 1
-
         if count == 1:      # O half_char é a metade mais significativa
             byte += half_char << 4
         elif count == 2:    # O half_char é a metade menos significativa
