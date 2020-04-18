@@ -26,7 +26,7 @@ for elemento in braille_lista:
         texto = texto + str(caracter)
     braille_lista_txt.append(texto)
 
-dicionario_braille_pt = {
+dicionario_braille_numeros = {
     braille_lista_txt[0] : "0",
     braille_lista_txt[1] : "1",
     braille_lista_txt[2] : "2",
@@ -36,7 +36,11 @@ dicionario_braille_pt = {
     braille_lista_txt[6] : "6",
     braille_lista_txt[7] : "7",
     braille_lista_txt[8] : "8",
-    braille_lista_txt[9] : "9",
+    braille_lista_txt[9] : "9"
+
+}
+
+dicionario_braille_pt = {
     braille_lista_txt[10] : "A",
     braille_lista_txt[11] : "B",
     braille_lista_txt[12] : "C",
@@ -63,15 +67,18 @@ dicionario_braille_pt = {
     braille_lista_txt[33] : "X",
     braille_lista_txt[34] : "Y",
     braille_lista_txt[35] : "Z",
-    braille_lista_txt[36] : True
+    braille_lista_txt[36] : True,
 }
 
 passador = False
 
 for i in range(len(strings)):
-    if strings[i] in dicionario_braille_pt and passador == False:
+    if passador == True:
+        passador = False
+        continue
+    if (strings[i] in dicionario_braille_pt or strings[i] in dicionario_braille_numeros):
         if dicionario_braille_pt[strings[i]] == True and i < len(strings):
-            print(dicionario_braille_pt[strings[i+1]], end="")
+            print(dicionario_braille_numeros[strings[i+1]], end="")
             passador = True
         else:
             print(dicionario_braille_pt[strings[i]], end="")
@@ -79,4 +86,4 @@ for i in range(len(strings)):
     elif strings[i] in dicionario_braille_pt and passador == True:
         passador = False
     else:
-        print("Não está no dicionario. ", strings[i])
+        print("\nNão está no dicionario. ", strings[i])
