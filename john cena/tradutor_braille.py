@@ -1,5 +1,3 @@
-# lista de listas = [[0,0,0,0,0,0],...]
-
 from random import randint
 import pickle
 
@@ -38,7 +36,7 @@ for i in range(len(strings)):
             num_encontrado = True 
             continue
         else:
-            print("Não foi encontrado conversão deste caracter: " + strings[i])
+            print("\nNão foi encontrado conversão deste caracter: " + strings[i], end="")
     except:
         print("Erro no caracter: " + strings[i])
 
